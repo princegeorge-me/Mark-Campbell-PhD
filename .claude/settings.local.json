@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(Copy-Item \"C:\\\\Users\\\\User\\\\Documents\\\\Claude\\\\Projects\\\\Dr Mark Campbell PhD\\\\layout.tsx\" \"C:\\\\Users\\\\User\\\\Documents\\\\Claude\\\\Projects\\\\Dr Mark Campbell PhD\\\\site\\\\app\\\\layout.tsx\")",
+      "Bash(Copy-Item \"C:\\\\Users\\\\User\\\\Documents\\\\Claude\\\\Projects\\\\Dr Mark Campbell PhD\\\\page.tsx\" \"C:\\\\Users\\\\User\\\\Documents\\\\Claude\\\\Projects\\\\Dr Mark Campbell PhD\\\\site\\\\app\\\\page.tsx\")",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(sleep 8 && cat /tmp/next-dev.log)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3002/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/)",
+      "Bash(npx tsc *)",
+      "Bash(pkill -f \"next dev\\\\|next-server\")",
+      "PowerShell(taskkill /F /IM node.exe 2>$null)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git add *)"
+    ]
+  }
+}

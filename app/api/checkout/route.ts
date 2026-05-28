@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-05-27.dahlia",
-});
+export const dynamic = "force-dynamic";
+
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2026-05-27.dahlia",
+  });
+}
 
 export async function POST(request: NextRequest) {
+  const stripe = getStripe();
   try {
     const { bookTitle, bookSubtitle, bookDescription } = await request.json();
 

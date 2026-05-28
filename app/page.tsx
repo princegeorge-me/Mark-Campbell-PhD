@@ -488,7 +488,7 @@ const HeroSection: FC = () => {
 
                   {/* Executive portrait */}
                   <Image
-                    src="/dr-mark-campbell.jpg"
+                    src="/dr-mark-campbell-hero.jpeg"
                     alt="Dr. Mark Campbell, VP of Information Technology, Houston Rockets"
                     fill
                     sizes="(max-width: 768px) 100vw, 520px"

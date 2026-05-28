@@ -2112,14 +2112,16 @@ const Footer: FC = () => {
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[
-                { Icon: Linkedin, label: "LinkedIn" },
-                { Icon: Twitter, label: "Twitter / X" },
-                { Icon: Youtube, label: "YouTube" },
-                { Icon: Globe, label: "Website" },
-              ].map(({ Icon, label }) => (
+                { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/markcampbelltechexec/" },
+                { Icon: Twitter, label: "Twitter / X", href: "#" },
+                { Icon: Youtube, label: "YouTube", href: "#" },
+                { Icon: Globe, label: "Website", href: "#" },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target={href !== "#" ? "_blank" : undefined}
+                  rel={href !== "#" ? "noopener noreferrer" : undefined}
                   className="w-[36px] h-[36px] flex items-center justify-center rounded-[3px] bg-[#0B0F19] border border-white/[0.08] text-[#6B7280] hover:text-white hover:border-[#E41133]/30 hover:bg-[#E41133]/[0.07] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
                   aria-label={label}
                 >

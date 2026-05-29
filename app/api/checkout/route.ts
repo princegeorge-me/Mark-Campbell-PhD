@@ -12,7 +12,7 @@ function getStripe() {
 export async function POST(request: NextRequest) {
   const stripe = getStripe();
   try {
-    const { bookTitle, bookSubtitle, bookDescription } = await request.json();
+    const { bookTitle, bookSubtitle, bookDescription, coverImage } = await request.json();
 
     const baseUrl = (
       process.env.NEXT_PUBLIC_BASE_URL || "https://mark-campbell-ph-d.vercel.app"
@@ -27,6 +27,9 @@ export async function POST(request: NextRequest) {
             product_data: {
               name: `${bookTitle}: ${bookSubtitle}`,
               description: bookDescription,
+              ...(coverImage
+                ? { images: [`${baseUrl}${coverImage}`] }
+                : {}),
             },
             unit_amount: 2495, // $24.95
           },

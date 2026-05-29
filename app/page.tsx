@@ -945,27 +945,14 @@ const BookCard: FC<{ book: Book; direction: "left" | "right"; inView: boolean }>
   direction,
   inView,
 }) => {
-  const [loading, setLoading] = useState(false);
-
-  const handleBuyBook = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bookTitle: book.title,
-          bookSubtitle: book.subtitle,
-          bookDescription: book.tagline,
-        }),
-      });
-      const data = await res.json();
-      if (data.url) window.location.href = data.url;
-    } catch (err) {
-      console.error("Checkout error:", err);
-    } finally {
-      setLoading(false);
-    }
+  const handleBuyBook = () => {
+    const params = new URLSearchParams({
+      title: book.title,
+      subtitle: book.subtitle,
+      description: book.tagline,
+      cover: book.coverImage,
+    });
+    window.location.href = `/checkout?${params.toString()}`;
   };
 
   const imgVariant = direction === "left" ? slideInLeft : slideInRight;
@@ -1037,19 +1024,9 @@ const BookCard: FC<{ book: Book; direction: "left" | "right"; inView: boolean }>
           <button
             type="button"
             onClick={handleBuyBook}
-            disabled={loading}
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#E41133] hover:bg-[#cc0e2b] disabled:opacity-70 disabled:cursor-not-allowed text-white font-black text-[14px] tracking-[0.04em] rounded-[3px] transition-all duration-300 hover:shadow-[0_0_32px_rgba(228,17,51,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#E41133] hover:bg-[#cc0e2b] text-white font-black text-[14px] tracking-[0.04em] rounded-[3px] transition-all duration-300 hover:shadow-[0_0_32px_rgba(228,17,51,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
           >
-            {loading ? (
-              <>
-                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Processing…
-              </>
-            ) : (
-              <>
-                Buy Book — $24.95 <ArrowRight size={15} strokeWidth={2.5} />
-              </>
-            )}
+            Buy Book — $24.95 <ArrowRight size={15} strokeWidth={2.5} />
           </button>
         </div>
       </motion.div>

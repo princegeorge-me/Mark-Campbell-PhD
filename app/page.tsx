@@ -34,6 +34,7 @@ import {
   Linkedin,
   Twitter,
   Youtube,
+  Instagram,
   Globe,
   CheckCircle,
   TrendingUp,
@@ -2124,10 +2125,11 @@ const Footer: FC = () => {
             </p>
             <div className="flex flex-wrap gap-2.5">
               {[
-                { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/markcampbelltechexec/" },
-                { Icon: Twitter, label: "Twitter / X", href: "#" },
-                { Icon: Youtube, label: "YouTube", href: "#" },
-                { Icon: Globe, label: "Website", href: "#" },
+                { Icon: Linkedin,  label: "LinkedIn",    href: "https://www.linkedin.com/in/markcampbelltechexec/" },
+                { Icon: Instagram, label: "Instagram",   href: "https://www.instagram.com/markcampbellphd/" },
+                { Icon: Twitter,   label: "Twitter / X", href: "#" },
+                { Icon: Youtube,   label: "YouTube",     href: "#" },
+                { Icon: Globe,     label: "Website",     href: "#" },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}

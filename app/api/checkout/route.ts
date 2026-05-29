@@ -14,8 +14,9 @@ export async function POST(request: NextRequest) {
   try {
     const { bookTitle, bookSubtitle, bookDescription } = await request.json();
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL || "https://mark-campbell-ph-d.vercel.app";
+    const baseUrl = (
+      process.env.NEXT_PUBLIC_BASE_URL || "https://mark-campbell-ph-d.vercel.app"
+    ).trim();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -26,7 +27,6 @@ export async function POST(request: NextRequest) {
             product_data: {
               name: `${bookTitle}: ${bookSubtitle}`,
               description: bookDescription,
-              images: [],
             },
             unit_amount: 2495, // $24.95
           },
@@ -48,9 +48,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error("Stripe checkout error:", error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("Stripe checkout error:", errMsg);
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      { error: "Failed to create checkout session", detail: errMsg },
       { status: 500 }
     );
   }

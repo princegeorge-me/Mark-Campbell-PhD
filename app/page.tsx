@@ -408,7 +408,7 @@ const HeroSection: FC = () => {
               <br />
               of Technology
               <br />
-              <span className="text-[#D1D5DB]">&amp; Leadership.</span>
+              <span className="text-[#D1D5DB]">&amp; Leadership</span>
             </motion.h1>
 
             {/* Sub-headline */}
@@ -722,8 +722,8 @@ const TIMELINE = [
   },
   {
     period: "Foundation",
-    role: "U.S. Army &amp; Public Service",
-    org: "Military &amp; Education Leadership",
+    role: "U.S. Army & Public Service",
+    org: "Military & Education Leadership",
     description:
       "Built the character, discipline, and leadership principles that underpin a 30-year executive career through military service and dedication to public education and community.",
     Icon: Shield,
@@ -1063,11 +1063,7 @@ const BooksSection: FC = () => {
             variants={fadeInUp}
             className="text-[clamp(2rem,4.5vw,3.25rem)] font-black text-[#0B0F19] tracking-[-0.025em] leading-[1.05] mb-4"
           >
-            Executive Insights,
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E41133] via-[#f03558] to-[#ff5c75]">
-              Published.
-            </span>
+            Executive Insights
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-[#4B5563] text-[15px] max-w-lg mx-auto leading-[1.75]">
             Two books that have become essential reading for technology executives and
@@ -1786,7 +1782,7 @@ const ContactSection: FC = () => {
               Campbell to Your
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E41133] via-[#f03558] to-[#ff5c75]">
-                Organization.
+                Organization
               </span>
             </motion.h2>
 

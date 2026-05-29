@@ -9,9 +9,7 @@ import {
   Shield,
   ArrowLeft,
   Star,
-  CheckCircle,
   BookOpen,
-  Truck,
   Mail,
   Cpu,
 } from "lucide-react";
@@ -309,10 +307,8 @@ function CheckoutContent() {
 
                   {/* Features */}
                   <div className="flex flex-col gap-3.5 mb-7">
-                    <Feature icon={BookOpen}     text="Digital eBook — PDF &amp; EPUB formats" />
-                    <Feature icon={Truck}        text="Physical copy — worldwide shipping" />
-                    <Feature icon={Mail}         text="Instant email order confirmation" />
-                    <Feature icon={CheckCircle}  text="30-day satisfaction guarantee" />
+                    <Feature icon={BookOpen}    text="Digital eBook — PDF &amp; EPUB formats" />
+                    <Feature icon={Mail}        text="Instant email order confirmation" />
                   </div>
 
                   {/* CTA button */}

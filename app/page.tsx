@@ -33,7 +33,6 @@ import {
   ChevronRight,
   Linkedin,
   Twitter,
-  Youtube,
   Instagram,
   Globe,
   CheckCircle,
@@ -528,7 +527,7 @@ const HeroSection: FC = () => {
               <motion.div
                 variants={fadeInUp}
                 transition={{ delay: 0.35 }}
-                className="absolute -left-5 top-10 bg-[#111827]/95 backdrop-blur-xl border border-white/[0.09] rounded-[3px] p-4 shadow-2xl w-[148px]"
+                className="hidden sm:block absolute -left-5 top-10 bg-[#111827]/95 backdrop-blur-xl border border-white/[0.09] rounded-[3px] p-4 shadow-2xl w-[148px]"
                 aria-label="30 plus years of leadership"
               >
                 <div className="text-[26px] font-black text-white leading-none mb-1">30<span className="text-[#E41133]">+</span></div>
@@ -539,7 +538,7 @@ const HeroSection: FC = () => {
               <motion.div
                 variants={fadeInUp}
                 transition={{ delay: 0.48 }}
-                className="absolute -right-5 top-[38%] bg-[#111827]/95 backdrop-blur-xl border border-white/[0.09] rounded-[3px] p-4 shadow-2xl w-[152px]"
+                className="hidden sm:block absolute -right-5 top-[38%] bg-[#111827]/95 backdrop-blur-xl border border-white/[0.09] rounded-[3px] p-4 shadow-2xl w-[152px]"
                 aria-label="Fortune-level executive experience"
               >
                 <div className="text-[18px] font-black text-white leading-none mb-1">Fortune<br/>500</div>
@@ -550,7 +549,7 @@ const HeroSection: FC = () => {
               <motion.div
                 variants={fadeInUp}
                 transition={{ delay: 0.6 }}
-                className="absolute -left-3 bottom-[14%] bg-[#E41133]/[0.12] backdrop-blur-xl border border-[#E41133]/[0.22] rounded-[3px] p-4 shadow-xl w-[148px]"
+                className="hidden sm:block absolute -left-3 bottom-[14%] bg-[#E41133]/[0.12] backdrop-blur-xl border border-[#E41133]/[0.22] rounded-[3px] p-4 shadow-xl w-[148px]"
                 aria-label="Author and keynote speaker"
               >
                 <Star size={15} className="text-[#E41133] mb-2" fill="currentColor" />
@@ -2124,8 +2123,6 @@ const Footer: FC = () => {
                 { Icon: Linkedin,  label: "LinkedIn",    href: "https://www.linkedin.com/in/markcampbelltechexec/" },
                 { Icon: Instagram, label: "Instagram",   href: "https://www.instagram.com/markcampbellphd/" },
                 { Icon: Twitter,   label: "Twitter / X", href: "#" },
-                { Icon: Youtube,   label: "YouTube",     href: "#" },
-                { Icon: Globe,     label: "Website",     href: "#" },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}

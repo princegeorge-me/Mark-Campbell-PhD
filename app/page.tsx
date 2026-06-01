@@ -1682,9 +1682,19 @@ const ContactSection: FC = () => {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1600));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch {
+      setErrors({ message: "Something went wrong. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (

@@ -24,7 +24,18 @@
       "Bash(git push *)",
       "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__list_teams",
       "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__list_projects",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__list_deployments",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__get_deployment_build_logs",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__web_fetch_vercel_url",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__deploy_to_vercel",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__get_project",
+      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\vercel\\\\\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:USERPROFILE\\\\.vercel\\\\\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:USERPROFILE\\\\.config\\\\vercel\\\\\" -ErrorAction SilentlyContinue)",
+      "PowerShell($auth = Get-Content \"C:\\\\Users\\\\User\\\\AppData\\\\Roaming\\\\com.vercel.cli\\\\Data\\\\auth.json\" | ConvertFrom-Json; $token = $auth.token; Write-Host \"Token: $\\($token.Substring\\(0,12\\)\\)...\"; $headers = @{ \"Authorization\" = \"Bearer $token\"; \"Content-Type\" = \"application/json\" }; $body = '{\"framework\":\"nextjs\"}' | ConvertTo-Json -Compress; Invoke-RestMethod -Uri \"https://api.vercel.com/v9/projects/prj_UE3Sc0TmC0rybrEz9hGQBIOm3c36?teamId=team_2AzFkz2zvhRDDHfPG93ztAtJ\" -Method PATCH -Headers $headers -Body '{\"framework\":\"nextjs\"}' -ContentType \"application/json\" | Select-Object name, framework, live)",
+      "mcp__8fec813e-a0df-4245-b035-c3ed824cf403__get_runtime_logs",
+      "Bash(vercel env *)",
+      "Bash(vercel --prod)",
+      "Bash(cd \"/c/Users/User/Documents/Claude/Projects/Dr Mark Campbell PhD\" && ls -la)"
     ]
   }
 }

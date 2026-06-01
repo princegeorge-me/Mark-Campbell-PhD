@@ -8,3 +8,5 @@ node_modules/
 Thumbs.db
 tsconfig.tsbuildinfo
 site/
+
+.vercel

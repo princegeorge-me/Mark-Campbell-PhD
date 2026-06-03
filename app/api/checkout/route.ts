@@ -10,6 +10,15 @@ function getStripe() {
 }
 
 export async function POST(request: NextRequest) {
+  // Guard: fail fast with a clear log if the key is missing
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error("Stripe checkout error: STRIPE_SECRET_KEY is not set in environment variables");
+    return NextResponse.json(
+      { error: "Payment service misconfigured", detail: "Missing STRIPE_SECRET_KEY" },
+      { status: 500 }
+    );
+  }
+
   const stripe = getStripe();
   try {
     const { bookTitle, bookSubtitle, bookDescription, coverImage } = await request.json();
@@ -52,7 +61,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: session.url });
   } catch (error) {
     const errMsg = error instanceof Error ? error.message : String(error);
-    console.error("Stripe checkout error:", errMsg);
+    // Log Stripe-specific fields when available for easier diagnosis
+    const stripeErr = error as Record<string, unknown>;
+    console.error(
+      "Stripe checkout error:",
+      JSON.stringify({
+        message: errMsg,
+        type: stripeErr?.type,
+        code: stripeErr?.code,
+        statusCode: stripeErr?.statusCode,
+        keyPrefix: process.env.STRIPE_SECRET_KEY?.slice(0, 8) ?? "NOT_SET",
+      })
+    );
     return NextResponse.json(
       { error: "Failed to create checkout session", detail: errMsg },
       { status: 500 }

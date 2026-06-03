@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
   const signature = request.headers.get("stripe-signature");
 
   if (!signature) {
+    console.error("[stripe-webhook] Missing stripe-signature header");
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
@@ -25,9 +26,13 @@ export async function POST(request: NextRequest) {
       process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (err) {
-    console.error("Webhook signature verification failed:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[stripe-webhook] Signature verification failed:", msg);
+    console.error("[stripe-webhook] STRIPE_WEBHOOK_SECRET prefix:", process.env.STRIPE_WEBHOOK_SECRET?.slice(0, 12) ?? "NOT_SET");
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
+
+  console.log("[stripe-webhook] Event received:", event.type);
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
@@ -41,8 +46,15 @@ export async function POST(request: NextRequest) {
       : "24.95";
     const orderId = session.id.slice(-10).toUpperCase();
 
+    console.log("[stripe-webhook] Order details — customer:", customerEmail, "| book:", bookTitle, "| amount:", amount);
+
     const webhookUrl = process.env.GHL_ORDER_WEBHOOK_URL;
-    if (webhookUrl && customerEmail) {
+
+    if (!webhookUrl) {
+      console.error("[stripe-webhook] GHL_ORDER_WEBHOOK_URL is not set in environment variables");
+    } else if (!customerEmail) {
+      console.error("[stripe-webhook] No customer email in session — skipping GHL");
+    } else {
       const nameParts = customerName.trim().split(" ");
       const firstName = nameParts[0] ?? customerName;
       const lastName = nameParts.slice(1).join(" ") || "";
@@ -61,18 +73,23 @@ export async function POST(request: NextRequest) {
         tags: ["book-buyer", "customer"],
       };
 
+      console.log("[stripe-webhook] Sending to GHL:", webhookUrl.slice(0, 60) + "...");
+
       try {
         const ghlRes = await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+
+        const ghlBody = await ghlRes.text();
         if (!ghlRes.ok) {
-          console.error("GHL order webhook error:", ghlRes.status, await ghlRes.text());
+          console.error("[stripe-webhook] GHL responded with error:", ghlRes.status, ghlBody);
+        } else {
+          console.log("[stripe-webhook] GHL accepted the webhook:", ghlRes.status, ghlBody);
         }
       } catch (err) {
-        console.error("GHL order webhook fetch error:", err);
-        // Don't fail — payment already succeeded
+        console.error("[stripe-webhook] GHL fetch failed:", err instanceof Error ? err.message : String(err));
       }
     }
   }

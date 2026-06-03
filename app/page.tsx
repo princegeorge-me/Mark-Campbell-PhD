@@ -2174,7 +2174,13 @@ const Footer: FC = () => {
             &copy; {year} Dr. Mark Campbell, PhD &amp; D.Sc. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {["Privacy Policy", "Terms of Use", "Accessibility"].map((link) => (
+            <a
+              href="/privacy-policy"
+              className="text-[#374151] hover:text-[#9CA3AF] text-[12px] transition-colors duration-300 focus-visible:outline-none focus-visible:text-[#9CA3AF]"
+            >
+              Privacy Policy
+            </a>
+            {["Terms of Use", "Accessibility"].map((link) => (
               <a
                 key={link}
                 href="#"

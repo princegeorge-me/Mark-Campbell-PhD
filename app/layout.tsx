@@ -82,9 +82,9 @@ export const metadata: Metadata = {
   },
   category: "Business & Leadership",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon-1.png",
+    shortcut: "/favicon-1.png",
+    apple: "/favicon-1.png",
   },
 };
 

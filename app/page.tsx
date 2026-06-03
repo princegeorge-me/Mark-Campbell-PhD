@@ -16,6 +16,7 @@ import React, {
   useEffect,
   useCallback,
   useRef,
+  useMemo,
   type FC,
 } from "react";
 import Image from "next/image";
@@ -1664,6 +1665,13 @@ const ContactSection: FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Minimum selectable date = tomorrow in the user's local timezone
+  const minDate = useMemo(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toLocaleDateString("en-CA"); // produces YYYY-MM-DD
+  }, []);
+
   const validate = (): boolean => {
     const e: FormErrors = {};
     if (!form.name.trim()) e.name = "Full name is required";
@@ -1672,6 +1680,9 @@ const ContactSection: FC = () => {
       e.email = "Email address is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       e.email = "Please enter a valid email address";
+    }
+    if (form.eventDate && form.eventDate < minDate) {
+      e.eventDate = "Event date must be at least tomorrow";
     }
     if (!form.message.trim()) e.message = "Please share your event details";
     setErrors(e);
@@ -1941,8 +1952,14 @@ const ContactSection: FC = () => {
                           <input
                             id="eventDate" name="eventDate" type="date"
                             value={form.eventDate} onChange={handleChange}
-                            className={`${inputNormal} [color-scheme:dark]`}
+                            min={minDate}
+                            aria-invalid={!!errors.eventDate}
+                            aria-describedby={errors.eventDate ? "err-eventDate" : undefined}
+                            className={`${errors.eventDate ? inputError : inputNormal} [color-scheme:dark]`}
                           />
+                          {errors.eventDate && (
+                            <p id="err-eventDate" role="alert" className="mt-1.5 text-[#E41133] text-[12px]">{errors.eventDate}</p>
+                          )}
                         </div>
 
                         {/* Message */}

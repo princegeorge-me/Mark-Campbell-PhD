@@ -14,6 +14,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Date constraint: if provided, must be strictly after today (UTC)
+    if (eventDate) {
+      const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD" in UTC
+      if (eventDate <= today) {
+        return NextResponse.json(
+          { error: "Event date must be at least tomorrow" },
+          { status: 400 }
+        );
+      }
+    }
+
     const webhookUrl = process.env.GHL_BOOKING_WEBHOOK_URL;
     if (!webhookUrl) {
       console.error("GHL_BOOKING_WEBHOOK_URL is not set");

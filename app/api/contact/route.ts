@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sanitize } from "@/lib/sanitize";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, organization, email, eventDate, message } =
-      await request.json();
+    const body = await request.json();
+
+    // Sanitize all inputs before processing
+    const name         = sanitize(body.name);
+    const organization = sanitize(body.organization);
+    const email        = sanitize(body.email);
+    const eventDate    = sanitize(body.eventDate);
+    const message      = sanitize(body.message);
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -14,9 +21,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 }
+      );
+    }
+
     // Date constraint: if provided, must be strictly after today (UTC)
     if (eventDate) {
-      const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD" in UTC
+      const today = new Date().toISOString().split("T")[0];
       if (eventDate <= today) {
         return NextResponse.json(
           { error: "Event date must be at least tomorrow" },
@@ -34,27 +49,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const nameParts = name.trim().split(" ");
+    const nameParts = name.split(" ");
     const firstName = nameParts[0] ?? name;
-    const lastName = nameParts.slice(1).join(" ") || "";
+    const lastName  = nameParts.slice(1).join(" ") || "";
 
     const payload = {
-      type: "booking_inquiry",
+      type:         "booking_inquiry",
       firstName,
       lastName,
       email,
       name,
-      organization: organization || "",
-      eventDate: eventDate || "",
+      organization,
+      eventDate,
       message,
-      source: "website_contact_form",
-      tags: ["speaking-inquiry", "website-lead"],
+      source:       "website_contact_form",
+      tags:         ["speaking-inquiry", "website-lead"],
     };
 
     const ghlRes = await fetch(webhookUrl, {
-      method: "POST",
+      method:  "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body:    JSON.stringify(payload),
     });
 
     if (!ghlRes.ok) {

@@ -52,7 +52,8 @@ export async function POST(request: NextRequest) {
         bookTitle,
         bookSubtitle,
       },
-      billing_address_collection: "auto",
+      billing_address_collection: "required",
+      phone_number_collection: { enabled: true },
       shipping_address_collection: {
         allowed_countries: ["US", "CA", "GB", "AU", "NG", "ZA"],
       },

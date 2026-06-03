@@ -39,6 +39,8 @@ export async function POST(request: NextRequest) {
 
     const customerName = session.customer_details?.name || "Valued Reader";
     const customerEmail = session.customer_details?.email || "";
+    const customerPhone = session.customer_details?.phone || "";
+    const billingAddress = session.customer_details?.address;
     const bookTitle = session.metadata?.bookTitle || "Book";
     const bookSubtitle = session.metadata?.bookSubtitle || "";
     const amount = session.amount_total
@@ -65,6 +67,13 @@ export async function POST(request: NextRequest) {
         lastName,
         email: customerEmail,
         name: customerName,
+        phone: customerPhone,
+        billingAddressLine1: billingAddress?.line1 || "",
+        billingAddressLine2: billingAddress?.line2 || "",
+        billingCity: billingAddress?.city || "",
+        billingState: billingAddress?.state || "",
+        billingZip: billingAddress?.postal_code || "",
+        billingCountry: billingAddress?.country || "",
         bookTitle,
         bookSubtitle,
         amountPaid: amount,

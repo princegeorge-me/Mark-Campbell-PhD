@@ -684,15 +684,16 @@ const PressSection: FC = () => {
               rel="noopener noreferrer"
               variants={scaleIn}
               className="group relative overflow-hidden rounded-[3px] hover:-translate-y-1.5 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(228,17,51,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
-              style={{ aspectRatio: "3/4" }}
+              style={{ aspectRatio: "3/2" }}
             >
               {/* Photo background */}
               <Image
                 src={image}
                 alt={headline}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                quality={90}
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Gradient overlay */}

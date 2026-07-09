@@ -616,6 +616,7 @@ const PRESS_MENTIONS = [
     headline: "Top 10 Most Inspiring Men in 2026",
     url: "https://www.msn.com/en-us/money/news/top-10-most-inspiring-men-in-2026/ar-AA27k9CQ",
     year: "2026",
+    image: "/dr-mark-campbell-Inspiring-men.jpeg",
   },
 ] as const;
 
@@ -675,42 +676,51 @@ const PressSection: FC = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year }) => (
+          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image }) => (
             <motion.a
               key={url}
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               variants={scaleIn}
-              className="group relative flex flex-col gap-4 p-6 bg-[#111827] border border-white/[0.07] rounded-[3px] hover:border-[#E41133]/30 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(228,17,51,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
+              className="group relative overflow-hidden rounded-[3px] hover:-translate-y-1.5 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(228,17,51,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
+              style={{ aspectRatio: "3/4" }}
             >
-              {/* Top row */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-[42px] h-[42px] rounded-[3px] bg-[#E41133]/[0.09] border border-[#E41133]/[0.18] flex items-center justify-center flex-shrink-0 group-hover:bg-[#E41133]/[0.16] transition-colors duration-300">
-                    <Globe size={18} className="text-[#E41133]" />
-                  </div>
-                  <div>
-                    <p className="text-white font-black text-[14px] leading-tight">{outlet}</p>
-                    <p className="text-[#6B7280] text-[11px] mt-0.5">{badge}</p>
-                  </div>
+              {/* Photo background */}
+              <Image
+                src={image}
+                alt={headline}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/40 to-transparent" />
+
+              {/* Top badge */}
+              <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#E41133] rounded-[2px]">
+                  <Globe size={10} className="text-white" />
+                  <span className="text-white text-[10px] font-black tracking-[0.12em] uppercase">{outlet}</span>
+                </span>
+                <span className="px-2.5 py-1 bg-black/50 backdrop-blur-sm rounded-[2px] text-white text-[10px] font-bold">{year}</span>
+              </div>
+
+              {/* Bottom content */}
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <p className="text-[#E41133] text-[10px] font-bold tracking-[0.2em] uppercase mb-2">{badge}</p>
+                <h3 className="text-white font-black text-[16px] leading-[1.3] mb-4 group-hover:text-[#F9FAFB] transition-colors">
+                  {headline}
+                </h3>
+                <div className="flex items-center gap-2 text-white/70 text-[12px] font-bold group-hover:text-[#E41133] group-hover:gap-3 transition-all duration-300">
+                  <span>Read Article</span>
+                  <ExternalLink size={12} />
                 </div>
-                <span className="text-[#4B5563] text-[11px] font-semibold flex-shrink-0">{year}</span>
               </div>
 
-              {/* Headline */}
-              <p className="text-[#D1D5DB] text-[14.5px] font-semibold leading-[1.5] group-hover:text-white transition-colors duration-300">
-                {headline}
-              </p>
-
-              {/* Read link */}
-              <div className="flex items-center gap-2 text-[#E41133] text-[12px] font-bold mt-auto group-hover:gap-3 transition-all duration-300">
-                <span>Read Article</span>
-                <ExternalLink size={12} />
-              </div>
-
-              {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E41133]/0 via-[#E41133]/50 to-[#E41133]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-[3px]" />
+              {/* Hover border glow */}
+              <div className="absolute inset-0 border border-[#E41133]/0 group-hover:border-[#E41133]/40 rounded-[3px] transition-colors duration-300 pointer-events-none" />
             </motion.a>
           ))}
 

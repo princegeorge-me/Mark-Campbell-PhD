@@ -617,6 +617,7 @@ const PRESS_MENTIONS = [
     url: "https://www.msn.com/en-us/money/news/top-10-most-inspiring-men-in-2026/ar-AA27k9CQ",
     year: "2026",
     image: "/dr-mark-campbell-Inspiring-men.jpeg",
+    objectPosition: "center 15%",
   },
   {
     outlet: "Chicago Business",
@@ -625,6 +626,7 @@ const PRESS_MENTIONS = [
     url: "https://www.chicagobusiness.com/recognitions/chicago-orbie-awards/cio/2023/mark-campbell/",
     year: "2023",
     image: "/Article1-Mark-Campbell.jpeg",
+    objectPosition: "center 10%",
   },
   {
     outlet: "Government Technology",
@@ -633,6 +635,7 @@ const PRESS_MENTIONS = [
     url: "https://www.govtech.com/top-25/Mark-Campbell.html",
     year: "Top 25",
     image: "/Article2-Mark-Campbell.jpeg",
+    objectPosition: "center 10%",
   },
   {
     outlet: "Government Technology",
@@ -641,6 +644,7 @@ const PRESS_MENTIONS = [
     url: "https://www.govtech.com/districts/videos/Remote-Work-Pays-Off-for-Atlanta-Housing-Authority.html",
     year: "Featured",
     image: "/Article3-Mark-Campbell.jpeg",
+    objectPosition: "center 15%",
   },
   {
     outlet: "Pittsburgh Post-Gazette",
@@ -649,6 +653,7 @@ const PRESS_MENTIONS = [
     url: "https://www.post-gazette.com/local/city/2013/04/08/for-pittsburgh-teachers-ipads-keeping-students-charged/stories/201304080110",
     year: "2013",
     image: "/Article4-Mark-Campbell.jpeg",
+    objectPosition: "center 10%",
   },
   {
     outlet: "Ho-Chunk Nation",
@@ -657,6 +662,7 @@ const PRESS_MENTIONS = [
     url: "https://www.facebook.com/HoChunkNation/photos/please-tell-us-what-you-think-of-this-style-of-introducing-new-key-employees-inc/10157446187819181/",
     year: "Featured",
     image: "/Article5-Mark-Campbell.jpeg",
+    objectPosition: "center 10%",
   },
 ] as const;
 
@@ -716,7 +722,7 @@ const PressSection: FC = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image }) => (
+          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image, objectPosition }) => (
             <motion.a
               key={url}
               href={url}
@@ -733,7 +739,8 @@ const PressSection: FC = () => {
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                 quality={90}
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                style={{ objectPosition }}
               />
 
               {/* Gradient overlay */}

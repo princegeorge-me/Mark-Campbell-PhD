@@ -618,6 +618,46 @@ const PRESS_MENTIONS = [
     year: "2026",
     image: "/dr-mark-campbell-Inspiring-men.jpeg",
   },
+  {
+    outlet: "Chicago Business",
+    badge: "Chicago ORBIE Awards",
+    headline: "CIO of the Year — ORBIE Award Honoree",
+    url: "https://www.chicagobusiness.com/recognitions/chicago-orbie-awards/cio/2023/mark-campbell/",
+    year: "2023",
+    image: "/Article1-Mark-Campbell.jpeg",
+  },
+  {
+    outlet: "Government Technology",
+    badge: "Top 25 Doers, Dreamers & Drivers",
+    headline: "Mark Campbell Named Top 25 in Government Technology",
+    url: "https://www.govtech.com/top-25/Mark-Campbell.html",
+    year: "Top 25",
+    image: "/Article2-Mark-Campbell.jpeg",
+  },
+  {
+    outlet: "Government Technology",
+    badge: "Featured Video",
+    headline: "Remote Work Pays Off for Atlanta Housing Authority",
+    url: "https://www.govtech.com/districts/videos/Remote-Work-Pays-Off-for-Atlanta-Housing-Authority.html",
+    year: "Featured",
+    image: "/Article3-Mark-Campbell.jpeg",
+  },
+  {
+    outlet: "Pittsburgh Post-Gazette",
+    badge: "Education Technology",
+    headline: "For Pittsburgh Teachers, iPads Keeping Students Charged",
+    url: "https://www.post-gazette.com/local/city/2013/04/08/for-pittsburgh-teachers-ipads-keeping-students-charged/stories/201304080110",
+    year: "2013",
+    image: "/Article4-Mark-Campbell.jpeg",
+  },
+  {
+    outlet: "Ho-Chunk Nation",
+    badge: "Community Feature",
+    headline: "Introducing Dr. Mark Campbell — Executive Spotlight",
+    url: "https://www.facebook.com/HoChunkNation/photos/please-tell-us-what-you-think-of-this-style-of-introducing-new-key-employees-inc/10157446187819181/",
+    year: "Featured",
+    image: "/Article5-Mark-Campbell.jpeg",
+  },
 ] as const;
 
 // ════════════════════════════════════════════════════════
@@ -725,18 +765,6 @@ const PressSection: FC = () => {
             </motion.a>
           ))}
 
-          {/* Placeholder card — scales as more press comes in */}
-          <motion.div
-            variants={scaleIn}
-            className="flex flex-col items-center justify-center gap-3 p-6 bg-[#111827]/50 border border-dashed border-white/[0.08] rounded-[3px] text-center"
-          >
-            <div className="w-[42px] h-[42px] rounded-[3px] bg-white/[0.03] border border-white/[0.07] flex items-center justify-center">
-              <Star size={18} className="text-[#374151]" />
-            </div>
-            <p className="text-[#374151] text-[13px] font-semibold leading-[1.5]">
-              More coverage<br />coming soon
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>

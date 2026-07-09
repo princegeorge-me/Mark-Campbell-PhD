@@ -199,6 +199,7 @@ const NAV_LINKS = [
   { href: "#books", label: "Books" },
   { href: "#speaking", label: "Speaking" },
   { href: "#leadership", label: "Leadership" },
+  { href: "#press", label: "Press" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
@@ -455,6 +456,29 @@ const HeroSection: FC = () => {
                 <BookOpen size={15} />
               </a>
             </motion.div>
+
+            {/* As Featured In — press strip */}
+            <motion.div variants={fadeInUp} className="pt-8 border-t border-white/[0.07]">
+              <p className="text-[#4B5563] text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
+                As Featured In
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                {PRESS_MENTIONS.map(({ outlet, headline, url }) => (
+                  <a
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-white/[0.04] border border-white/[0.09] hover:border-[#E41133]/35 hover:bg-white/[0.07] rounded-[3px] transition-all duration-300 group"
+                  >
+                    <Globe size={13} className="text-[#E41133] flex-shrink-0" />
+                    <span className="text-white text-[12px] font-bold">{outlet}</span>
+                    <span className="text-[#6B7280] text-[11px] hidden sm:inline">{headline}</span>
+                    <ExternalLink size={11} className="text-[#4B5563] group-hover:text-[#E41133] transition-colors flex-shrink-0" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* ─── RIGHT: Portrait ─── */}
@@ -582,8 +606,131 @@ const HeroSection: FC = () => {
 };
 
 // ════════════════════════════════════════════════════════
+// PRESS MENTIONS DATA (shared by Hero strip + PressSection)
+// ════════════════════════════════════════════════════════
+
+const PRESS_MENTIONS = [
+  {
+    outlet: "MSN",
+    badge: "Money & Business",
+    headline: "Top 10 Most Inspiring Men in 2026",
+    url: "https://www.msn.com/en-us/money/news/top-10-most-inspiring-men-in-2026/ar-AA27k9CQ",
+    year: "2026",
+  },
+] as const;
+
+// ════════════════════════════════════════════════════════
 // SECTION 3: TRUST / CREDENTIALS
 // ════════════════════════════════════════════════════════
+
+// ════════════════════════════════════════════════════════
+// SECTION: PRESS & MEDIA
+// ════════════════════════════════════════════════════════
+
+const PressSection: FC = () => {
+  const { ref, isInView } = useSectionInView(0.2);
+
+  return (
+    <section
+      id="press"
+      ref={ref}
+      className="relative py-20 bg-[#0B0F19] border-b border-white/[0.055] overflow-hidden"
+      aria-labelledby="press-heading"
+    >
+      {/* Subtle background accent */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[1px] bg-gradient-to-r from-transparent via-[#E41133]/30 to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[1px] bg-gradient-to-r from-transparent via-[#E41133]/15 to-transparent" />
+        <div className="absolute top-0 right-0 w-[400px] h-full bg-[#E41133]/[0.02] blur-[80px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+        {/* Header */}
+        <motion.div
+          variants={stagger(0.1)}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="text-center mb-12"
+        >
+          <motion.div variants={fadeInUp} className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-10 bg-[#E41133]" />
+            <span className="text-[#E41133] text-[10.5px] font-bold tracking-[0.32em] uppercase">
+              Press &amp; Media
+            </span>
+            <div className="h-px w-10 bg-[#E41133]" />
+          </motion.div>
+          <motion.h2
+            id="press-heading"
+            variants={fadeInUp}
+            className="text-[clamp(1.6rem,3.5vw,2.4rem)] font-black text-white tracking-[-0.025em]"
+          >
+            As Featured In
+          </motion.h2>
+        </motion.div>
+
+        {/* Press cards */}
+        <motion.div
+          variants={stagger(0.1)}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year }) => (
+            <motion.a
+              key={url}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={scaleIn}
+              className="group relative flex flex-col gap-4 p-6 bg-[#111827] border border-white/[0.07] rounded-[3px] hover:border-[#E41133]/30 hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(228,17,51,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E41133]"
+            >
+              {/* Top row */}
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-[42px] h-[42px] rounded-[3px] bg-[#E41133]/[0.09] border border-[#E41133]/[0.18] flex items-center justify-center flex-shrink-0 group-hover:bg-[#E41133]/[0.16] transition-colors duration-300">
+                    <Globe size={18} className="text-[#E41133]" />
+                  </div>
+                  <div>
+                    <p className="text-white font-black text-[14px] leading-tight">{outlet}</p>
+                    <p className="text-[#6B7280] text-[11px] mt-0.5">{badge}</p>
+                  </div>
+                </div>
+                <span className="text-[#4B5563] text-[11px] font-semibold flex-shrink-0">{year}</span>
+              </div>
+
+              {/* Headline */}
+              <p className="text-[#D1D5DB] text-[14.5px] font-semibold leading-[1.5] group-hover:text-white transition-colors duration-300">
+                {headline}
+              </p>
+
+              {/* Read link */}
+              <div className="flex items-center gap-2 text-[#E41133] text-[12px] font-bold mt-auto group-hover:gap-3 transition-all duration-300">
+                <span>Read Article</span>
+                <ExternalLink size={12} />
+              </div>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E41133]/0 via-[#E41133]/50 to-[#E41133]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-[3px]" />
+            </motion.a>
+          ))}
+
+          {/* Placeholder card — scales as more press comes in */}
+          <motion.div
+            variants={scaleIn}
+            className="flex flex-col items-center justify-center gap-3 p-6 bg-[#111827]/50 border border-dashed border-white/[0.08] rounded-[3px] text-center"
+          >
+            <div className="w-[42px] h-[42px] rounded-[3px] bg-white/[0.03] border border-white/[0.07] flex items-center justify-center">
+              <Star size={18} className="text-[#374151]" />
+            </div>
+            <p className="text-[#374151] text-[13px] font-semibold leading-[1.5]">
+              More coverage<br />coming soon
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const CREDENTIALS = [
   { abbr: "HOU", name: "Houston Rockets", subtitle: "NBA · VP of Information Technology" },
@@ -2103,7 +2250,7 @@ const Footer: FC = () => {
           <div>
             <h3 className="text-white text-[10.5px] font-black tracking-[0.22em] uppercase mb-5">Quick Links</h3>
             <ul className="space-y-3" role="list">
-              {["Home", "About", "Books", "Speaking", "Leadership", "Contact"].map((link) => (
+              {["Home", "About", "Books", "Speaking", "Leadership", "Press", "Contact"].map((link) => (
                 <li key={link}>
                   <a
                     href={`#${link.toLowerCase()}`}
@@ -2213,6 +2360,7 @@ export default function DrMarkCampbellPage() {
       <Navigation />
       <main id="main-content">
         <HeroSection />
+        <PressSection />
         <TrustSection />
         <AboutSection />
         <BooksSection />

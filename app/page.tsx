@@ -625,8 +625,8 @@ const PRESS_MENTIONS = [
     headline: "CIO of the Year — ORBIE Award Honoree",
     url: "https://www.chicagobusiness.com/recognitions/chicago-orbie-awards/cio/2023/mark-campbell/",
     year: "2023",
-    image: "/ORBIE.jpeg",
-    objectPosition: "center 35%",
+    image: "/ORBIE-award.jpg",
+    objectPosition: "center 25%",
   },
   {
     outlet: "Government Technology",

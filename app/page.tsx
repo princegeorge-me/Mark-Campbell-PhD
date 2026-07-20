@@ -625,8 +625,8 @@ const PRESS_MENTIONS = [
     headline: "CIO of the Year — ORBIE Award Honoree",
     url: "https://www.chicagobusiness.com/recognitions/chicago-orbie-awards/cio/2023/mark-campbell/",
     year: "2023",
-    image: "/ORBIE-award.jpg",
-    objectPosition: "center 25%",
+    image: "/ORBIE.jpeg",
+    objectPosition: "center 35%",
   },
   {
     outlet: "Government Technology",
@@ -1564,11 +1564,11 @@ const SpeakingSection: FC = () => {
                   <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/70 to-transparent" />
                 </div>
                 <Image
-                  src="/Award-Dr mark Campbell.png"
+                  src="/ORBIE-award.jpg"
                   alt="Dr. Mark Campbell receiving an award"
                   fill
                   sizes="(max-width: 768px) 100vw, 520px"
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="h-[1.5px] w-10 bg-[#E41133] mb-3" />

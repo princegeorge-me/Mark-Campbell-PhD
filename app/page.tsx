@@ -625,8 +625,8 @@ const PRESS_MENTIONS = [
     headline: "CIO of the Year — ORBIE Award Honoree",
     url: "https://www.chicagobusiness.com/recognitions/chicago-orbie-awards/cio/2023/mark-campbell/",
     year: "2023",
-    image: "/Article1-Mark-Campbell.jpeg",
-    objectPosition: "center 10%",
+    image: "/ORBIE.jpeg",
+    objectPosition: "center 35%",
   },
   {
     outlet: "Government Technology",
@@ -634,8 +634,8 @@ const PRESS_MENTIONS = [
     headline: "Mark Campbell Named Top 25 in Government Technology",
     url: "https://www.govtech.com/top-25/Mark-Campbell.html",
     year: "Top 25",
-    image: "/Article2-Mark-Campbell.jpeg",
-    objectPosition: "center 10%",
+    image: "/CIO-White-Sox.png",
+    objectPosition: "center 30%",
   },
   {
     outlet: "Government Technology",
@@ -643,8 +643,8 @@ const PRESS_MENTIONS = [
     headline: "Remote Work Pays Off for Atlanta Housing Authority",
     url: "https://www.govtech.com/districts/videos/Remote-Work-Pays-Off-for-Atlanta-Housing-Authority.html",
     year: "Featured",
-    image: "/Article3-Mark-Campbell.jpeg",
-    objectPosition: "center 15%",
+    image: "/Atlanta-housing.jpg",
+    objectPosition: "center 50%",
   },
   {
     outlet: "Pittsburgh Post-Gazette",
@@ -652,8 +652,8 @@ const PRESS_MENTIONS = [
     headline: "For Pittsburgh Teachers, iPads Keeping Students Charged",
     url: "https://www.post-gazette.com/local/city/2013/04/08/for-pittsburgh-teachers-ipads-keeping-students-charged/stories/201304080110",
     year: "2013",
-    image: "/Article4-Mark-Campbell.jpeg",
-    objectPosition: "center 10%",
+    image: "/Pittsburg.png",
+    objectPosition: "center 30%",
   },
   {
     outlet: "Ho-Chunk Nation",
@@ -661,8 +661,8 @@ const PRESS_MENTIONS = [
     headline: "Introducing Dr. Mark Campbell — Executive Spotlight",
     url: "https://www.facebook.com/HoChunkNation/photos/please-tell-us-what-you-think-of-this-style-of-introducing-new-key-employees-inc/10157446187819181/",
     year: "Featured",
-    image: "/Article5-Mark-Campbell.jpeg",
-    objectPosition: "center 10%",
+    image: "/downtown-Atlanta.png",
+    objectPosition: "center 40%",
   },
 ] as const;
 

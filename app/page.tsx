@@ -618,6 +618,7 @@ const PRESS_MENTIONS = [
     year: "2026",
     image: "/dr-mark-campbell-Inspiring-men.jpeg",
     objectPosition: "center 15%",
+    isVideo: false,
   },
   {
     outlet: "Chicago Business",
@@ -627,6 +628,7 @@ const PRESS_MENTIONS = [
     year: "2023",
     image: "/ORBIE.jpeg",
     objectPosition: "center 35%",
+    isVideo: false,
   },
   {
     outlet: "Government Technology",
@@ -636,6 +638,7 @@ const PRESS_MENTIONS = [
     year: "Top 25",
     image: "/CIO-White-Sox.png",
     objectPosition: "center 30%",
+    isVideo: false,
   },
   {
     outlet: "Government Technology",
@@ -645,6 +648,7 @@ const PRESS_MENTIONS = [
     year: "Featured",
     image: "/Atlanta-housing.jpg",
     objectPosition: "center 50%",
+    isVideo: false,
   },
   {
     outlet: "Pittsburgh Post-Gazette",
@@ -654,6 +658,7 @@ const PRESS_MENTIONS = [
     year: "2013",
     image: "/Pittsburg.png",
     objectPosition: "center 30%",
+    isVideo: false,
   },
   {
     outlet: "Ho-Chunk Nation",
@@ -663,6 +668,17 @@ const PRESS_MENTIONS = [
     year: "Featured",
     image: "/downtown-Atlanta.png",
     objectPosition: "center 40%",
+    isVideo: false,
+  },
+  {
+    outlet: "Next In Line Podcast",
+    badge: "YouTube · Featured Interview",
+    headline: "Leadership in Tech, AI, Career Reinvention & Finding Your Purpose",
+    url: "https://www.youtube.com/watch?v=xKp5kr-8QCQ",
+    year: "Ep. 76",
+    image: "/youtube-next-in-line.jpg",
+    objectPosition: "center 30%",
+    isVideo: true,
   },
 ] as const;
 
@@ -722,7 +738,7 @@ const PressSection: FC = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image, objectPosition }) => (
+          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image, objectPosition, isVideo }) => (
             <motion.a
               key={url}
               href={url}
@@ -746,6 +762,17 @@ const PressSection: FC = () => {
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/40 to-transparent" />
 
+              {/* Play button overlay for video cards */}
+              {isVideo && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-[#E41133]/90 flex items-center justify-center shadow-[0_0_40px_rgba(228,17,51,0.5)] group-hover:scale-110 transition-transform duration-300">
+                    <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7 ml-1">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              )}
+
               {/* Top badge */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#E41133] rounded-[2px]">
@@ -762,7 +789,7 @@ const PressSection: FC = () => {
                   {headline}
                 </h3>
                 <div className="flex items-center gap-2 text-white/70 text-[12px] font-bold group-hover:text-[#E41133] group-hover:gap-3 transition-all duration-300">
-                  <span>Read Article</span>
+                  <span>{isVideo ? "Watch Video" : "Read Article"}</span>
                   <ExternalLink size={12} />
                 </div>
               </div>

@@ -690,8 +690,41 @@ const PRESS_MENTIONS = [
 // SECTION: PRESS & MEDIA
 // ════════════════════════════════════════════════════════
 
+type LivePressEntry = {
+  id?: number;
+  outlet: string;
+  badge: string;
+  headline: string;
+  url: string;
+  year: string;
+  image: string;
+  object_position: string;
+  is_video: boolean;
+};
+
+const FALLBACK_PRESS: LivePressEntry[] = PRESS_MENTIONS.map((m) => ({
+  outlet: m.outlet,
+  badge: m.badge,
+  headline: m.headline,
+  url: m.url,
+  year: m.year,
+  image: m.image,
+  object_position: m.objectPosition,
+  is_video: m.isVideo ?? false,
+}));
+
 const PressSection: FC = () => {
   const { ref, isInView } = useSectionInView(0.2);
+  const [pressData, setPressData] = useState<LivePressEntry[]>(FALLBACK_PRESS);
+
+  useEffect(() => {
+    fetch("/api/press")
+      .then((r) => r.json())
+      .then((data: LivePressEntry[]) => {
+        if (Array.isArray(data) && data.length > 0) setPressData(data);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section
@@ -738,9 +771,9 @@ const PressSection: FC = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
-          {PRESS_MENTIONS.map(({ outlet, badge, headline, url, year, image, objectPosition, isVideo }) => (
+          {pressData.map(({ id, outlet, badge, headline, url, year, image, object_position, is_video }) => (
             <motion.a
-              key={url}
+              key={id ?? url}
               href={url}
               target="_blank"
               rel="noopener noreferrer"
@@ -756,14 +789,14 @@ const PressSection: FC = () => {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                 quality={90}
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                style={{ objectPosition }}
+                style={{ objectPosition: object_position }}
               />
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/40 to-transparent" />
 
               {/* Play button overlay for video cards */}
-              {isVideo && (
+              {is_video && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-16 h-16 rounded-full bg-[#E41133]/90 flex items-center justify-center shadow-[0_0_40px_rgba(228,17,51,0.5)] group-hover:scale-110 transition-transform duration-300">
                     <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7 ml-1">
@@ -789,7 +822,7 @@ const PressSection: FC = () => {
                   {headline}
                 </h3>
                 <div className="flex items-center gap-2 text-white/70 text-[12px] font-bold group-hover:text-[#E41133] group-hover:gap-3 transition-all duration-300">
-                  <span>{isVideo ? "Watch Video" : "Read Article"}</span>
+                  <span>{is_video ? "Watch Video" : "Read Article"}</span>
                   <ExternalLink size={12} />
                 </div>
               </div>

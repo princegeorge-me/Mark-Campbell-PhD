@@ -12,8 +12,9 @@ interface RateRecord {
 const store = new Map<string, RateRecord>();
 
 const LIMITS: Record<string, { max: number; windowMs: number }> = {
-  "/api/checkout": { max: 5,  windowMs: 60_000 }, // 5 per minute
-  "/api/contact":  { max: 3,  windowMs: 60_000 }, // 3 per minute
+  "/api/checkout":     { max: 5, windowMs: 60_000 },  // 5 per minute
+  "/api/contact":      { max: 3, windowMs: 60_000 },  // 3 per minute
+  "/api/admin/login":  { max: 5, windowMs: 60_000 },  // 5 attempts per minute
 };
 
 function isRateLimited(ip: string, path: string): boolean {
@@ -68,5 +69,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/checkout", "/api/contact"],
+  matcher: ["/api/checkout", "/api/contact", "/api/admin/login"],
 };

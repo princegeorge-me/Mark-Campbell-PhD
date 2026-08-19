@@ -2423,9 +2423,23 @@ const Footer: FC = () => {
       {/* ─── Lower bar ─── */}
       <div className="border-t border-white/[0.055]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[#374151] text-[12px]">
-            &copy; {year} Dr. Mark Campbell, PhD &amp; D.Sc. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+            <p className="text-[#374151] text-[12px]">
+              &copy; {year} Dr. Mark Campbell, PhD &amp; D.Sc. All rights reserved.
+            </p>
+            <span className="hidden sm:inline text-[#2D3748] text-[12px]">·</span>
+            <p className="text-[#374151] text-[12px]">
+              Digital Excellence, Powered by{" "}
+              <a
+                href="https://www.gostatenext.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#4B5563] hover:text-[#9CA3AF] transition-colors duration-300"
+              >
+                StateNext Labs
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <a
               href="/privacy-policy"

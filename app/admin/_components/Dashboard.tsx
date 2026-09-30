@@ -314,16 +314,15 @@ export default function Dashboard() {
             <StatChip label="Videos" value={videoCount} color="#E41133" />
           </div>
           <div className="flex items-center gap-2">
-            {entries.length === 0 && !loading && (
-              <button
-                onClick={handleInit}
-                disabled={initializing}
-                className="flex items-center gap-1.5 px-3 py-2 bg-[#111827] border border-white/[0.08] hover:border-white/20 text-[#9CA3AF] hover:text-white text-xs font-medium rounded transition-colors disabled:opacity-50"
-              >
-                {initializing ? <Loader2 size={13} className="animate-spin" /> : <RefreshCw size={13} />}
-                Initialize &amp; Seed DB
-              </button>
-            )}
+            <button
+              onClick={handleInit}
+              disabled={initializing}
+              title="Sync any new entries added in code to the database"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111827] border border-white/[0.08] hover:border-white/20 text-[#9CA3AF] hover:text-white text-xs font-medium rounded transition-colors disabled:opacity-50"
+            >
+              {initializing ? <Loader2 size={13} className="animate-spin" /> : <RefreshCw size={13} />}
+              Sync DB
+            </button>
             <button
               onClick={openAdd}
               className="flex items-center gap-1.5 px-4 py-2 bg-[#E41133] hover:bg-[#cc0f2d] text-white text-sm font-bold rounded transition-colors"
@@ -342,15 +341,7 @@ export default function Dashboard() {
           </div>
         ) : entries.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-[#6B7280] mb-4">No entries yet.</p>
-            <button
-              onClick={handleInit}
-              disabled={initializing}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#111827] border border-white/[0.08] text-[#9CA3AF] text-sm font-medium rounded hover:border-white/20 transition-colors disabled:opacity-50"
-            >
-              {initializing ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
-              Initialize Database &amp; Seed Entries
-            </button>
+            <p className="text-[#6B7280] mb-4">No entries yet. Click <strong className="text-white">Sync DB</strong> to load entries.</p>
           </div>
         ) : (
           <div className="space-y-2">

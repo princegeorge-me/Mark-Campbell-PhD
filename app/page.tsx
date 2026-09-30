@@ -686,8 +686,8 @@ const PRESS_MENTIONS = [
     headline: "Marquis Who's Who Honors Mark Campbell, PhD, for Expertise in Information Technology Leadership and Innovation",
     url: "https://www.24-7pressrelease.com/press-release/538921/marquis-whos-who-honors-mark-campbell-phd-for-expertise-in-information-technology-leadership-and-innovation",
     year: "2026",
-    image: "/ORBIE-award.jpg",
-    objectPosition: "center 40%",
+    image: "/marquis-whos-who-mark-campbell.jpg",
+    objectPosition: "center 20%",
     isVideo: false,
   },
 ] as const;

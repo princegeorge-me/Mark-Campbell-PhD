@@ -514,14 +514,14 @@ export default function Dashboard() {
                     <div className="flex-1 h-px bg-white/[0.06]" />
                   </div>
                   <input
-                    type="url"
+                    type="text"
                     value={imageFile ? "" : form.image}
                     onChange={(e) => {
                       setField("image", e.target.value);
                       setImagePreview(e.target.value);
                       setImageFile(null);
                     }}
-                    placeholder="https://…"
+                    placeholder="https://… or /filename.jpg"
                     className="field-input"
                     disabled={!!imageFile}
                   />
